@@ -26,6 +26,8 @@ const pages = {
     name: true,
     email: true,
     password: "new-password",
+    checkboxtos: true,
+    checkboxpp: true,
     providers: true
   },
   amnesia: {

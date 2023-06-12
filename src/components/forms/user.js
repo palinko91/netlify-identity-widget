@@ -5,11 +5,22 @@ import Button from "./button";
 export default class UserForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", email: "", password: "" };
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      acceptedTerms: false,
+      acceptedPrivacyPolicy: false,
+    };
+    this.showAlert = false;
   }
 
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleCheckboxChange = (e) => {
+    this.setState({ [e.target.name]: e.target.checked });
   };
 
   handleLogin = (e) => {
@@ -19,7 +30,13 @@ export default class UserForm extends Component {
 
   render() {
     const { page, message, saving, namePlaceholder, t } = this.props;
-    const { name, email, password } = this.state;
+    const {
+      name,
+      email,
+      password,
+      acceptedTerms,
+      acceptedPrivacyPolicy,
+    } = this.state;
 
     return (
       <form
@@ -52,7 +69,7 @@ export default class UserForm extends Component {
         {page.email && (
           <div className="formGroup">
             <label>
-              <span className="visuallyHidden">{t("form_name_label")}</span>
+              <span className="visuallyHidden">{t("form_email_label")}</span>
               <input
                 className="formControl"
                 type="email"
@@ -82,6 +99,36 @@ export default class UserForm extends Component {
                 oninput={this.handleInput}
               />
               <div className="inputFieldIcon inputFieldPassword" />
+            </label>
+          </div>
+        )}
+        {page.checkboxtos && (
+          <div className="formGroup">
+            <label>
+              <input
+                type="checkbox"
+                name="acceptedTerms"
+                checked={acceptedTerms}
+                required
+                onchange={this.handleCheckboxChange}
+              />
+              {t("form_accept_terms_label")}{" "}
+              <a href="/terms-of-service" target="_blank">{t("form_terms_of_service_link")}</a>
+            </label>
+          </div>
+        )}
+        {page.checkboxpp && (
+          <div className="formGroup">
+            <label>
+              <input
+                type="checkbox"
+                name="acceptedPrivacyPolicy"
+                checked={acceptedPrivacyPolicy}
+                required
+                onchange={this.handleCheckboxChange}
+              />
+              {t("form_accept_privacy_policy_label")}{" "}
+              <a href="/privacy-policy" target="_blank">{t("form_privacy_policy_link")}</a>
             </label>
           </div>
         )}
