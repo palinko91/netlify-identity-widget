@@ -6,7 +6,8 @@ export default class UserForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      firstname: "",
+      lastname: "",
       email: "",
       password: "",
       acceptedTerms: false,
@@ -29,9 +30,10 @@ export default class UserForm extends Component {
   };
 
   render() {
-    const { page, message, saving, namePlaceholder, t } = this.props;
+    const { page, message, saving, t } = this.props;
     const {
-      name,
+      firstname,
+      lastname,
       email,
       password,
       acceptedTerms,
@@ -44,7 +46,7 @@ export default class UserForm extends Component {
         className={`form ${saving ? "disabled" : ""}`}
       >
         {message && <Message type={message} t={t} />}
-        {page.name && (
+        {page.firstname && (
           <div className="formGroup">
             <label>
               <span className="visuallyHidden">
@@ -53,10 +55,32 @@ export default class UserForm extends Component {
               <input
                 className="formControl"
                 type="name"
-                name="name"
-                value={name}
+                name="firstname"
+                value={firstname}
                 placeholder={
-                  namePlaceholder ? namePlaceholder : t("form_name_label")
+                  t("form_firstname_label")
+                }
+                autocapitalize="off"
+                required
+                oninput={this.handleInput}
+              />
+              <div className="inputFieldIcon inputFieldName" />
+            </label>
+          </div>
+        )}
+        {page.lastname && (
+          <div className="formGroup">
+            <label>
+              <span className="visuallyHidden">
+                {t("form_name_placeholder")}
+              </span>
+              <input
+                className="formControl"
+                type="name"
+                name="lastname"
+                value={lastname}
+                placeholder={
+                  t("form_lastname_label")
                 }
                 autocapitalize="off"
                 required

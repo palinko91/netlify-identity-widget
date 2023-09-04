@@ -124,10 +124,10 @@ store.completeExternalLogin = action(function completeExternalLogin(params) {
     .catch(store.setError);
 });
 
-store.signup = action(function signup(name, email, password) {
+store.signup = action(function signup(firstname, lastname, email, password) {
   store.startAction();
   return store.gotrue
-    .signup(email, password, { full_name: name })
+    .signup(email, password, { first_name: firstname, last_name: lastname, full_name: firstname + ' ' + lastname })
     .then(
       action(() => {
         if (store.settings.autoconfirm) {

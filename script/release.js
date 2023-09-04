@@ -8,7 +8,7 @@ exec("yarn");
 exec("yarn build");
 
 console.log("Creating release dir");
-exec("mkdir -p releases/" + version);
+exec("mkdir releases/" + version);
 
 console.log("copying release files");
 exec("cp build/* releases/" + version);
